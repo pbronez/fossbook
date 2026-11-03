@@ -418,6 +418,34 @@ describe("Multilingual site build", () => {
     assert.match(englishHome, />← Prev<\/span>/);
     assert.match(englishHome, />Next →<\/span>/);
     assert.match(englishHome, /© \d{4} Jane Doe/);
+
+    // microformats2: posts are h-entries, home pages are h-feeds
+    assert.match(englishPost, /<article class="content h-entry">/);
+    assert.match(englishPost, /<h1 class="title p-name">English title<\/h1>/);
+    assert.match(
+      englishPost,
+      /<data class="dt-published" value="2026-08-23T00:00:00\.000Z"><\/data>/,
+    );
+    assert.match(
+      englishPost,
+      /<data class="u-url" value="https:\/\/example\.com\/posts\/translated\/"><\/data>/,
+    );
+    assert.match(englishPost, /<section class="body e-content"/);
+    assert.match(englishPost, /<a class="p-category" href="\/tags\/test">test<\/a>/);
+    assert.match(
+      englishPost,
+      /<span class="p-author h-card" hidden>Jane Doe<\/span>/,
+    );
+    assert.match(koreanPost, /<span class="p-author h-card" hidden>이수현<\/span>/);
+    assert.match(englishHome, /<main class="list h-feed">/);
+    assert.match(englishHome, /<section class="list-item h-entry"/);
+    assert.match(
+      englishHome,
+      /<a class="p-name u-url" href="\/posts\/translated">English title<\/a>/,
+    );
+    assert.match(englishHome, /<time class="dt-published" datetime="2026-08-23T00:00:00\.000Z">/);
+    assert.match(koreanHome, /<data class="p-name" value="나의 블로그"><\/data>/);
+
     assert.match(koreanHome, /한국어 제목/);
     assert.match(koreanHome, /href="\/ko\/all_posts">모든 글<\/a>/);
     assert.match(koreanHome, /href="\/ko\/about">이곳은<\/a>/);

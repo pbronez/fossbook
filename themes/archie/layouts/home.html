@@ -33,7 +33,9 @@
                 </nav>
             </header>
 
-            <main class="list">
+            <main class="list h-feed">
+              <data class="p-name" value="${page.config.blogName}"></data>
+              ${page.microformatAuthor()}
               <div class="site-description" aria-label="Site description">
                 <p>${page.config.blogDescription}</p>
               </div>
@@ -41,13 +43,13 @@
                   .map(
                     (
                       post,
-                    ) => `<section class="list-item" aria-label="Summary of post">
-                    <h1><a href="${page.config.basePath}${post.path}">${post.title}</a></h1>
-                        <time>${page.formatDate(new Date(post.date))}</time>
+                    ) => `<section class="list-item h-entry" aria-label="Summary of post">
+                    <h1><a class="p-name u-url" href="${page.config.basePath}${post.path}">${post.title}</a></h1>
+                        <time class="dt-published" datetime="${page.isoDate(post.date)}">${page.formatDate(new Date(post.date))}</time>
                       ${post.image ? `<div class="responsive-image">
-                         <img src="${page.config.basePath}${post.path}/images/${post.image}" alt="${post.title}">
+                         <img class="u-photo" src="${page.config.basePath}${post.path}/images/${post.image}" alt="${post.title}">
                       </div>` : ''}
-                      <div class="description">${post.description || ''}</div>
+                      <div class="description p-summary">${post.description || ''}</div>
                       <a class="readmore" href="${page.config.basePath}${post.path}">${page.config.readMoreLabel || "Read more"} ⟶</a>
                     </section>`,
                   )

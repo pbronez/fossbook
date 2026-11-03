@@ -663,6 +663,15 @@ Fossbook ships with the Archie theme by default. To use a custom theme:
 
 Theme resolution order: user project `themes/` → built-in `themes/`.
 
+### Microformats
+
+The Archie theme marks up pages with
+[microformats2](https://microformats.org/wiki/microformats2) so IndieWeb
+readers and tools can understand them. Each post is an `h-entry` (title, URL,
+publish date, summary, featured image, tags, content, and author), and the home
+page is an `h-feed` of the latest posts. The author `h-card` uses `authorName`
+and, if set, `authorWebsite`. The markup adds no visible content.
+
 ## Comments
 
 Fossbook supports [utterances](https://utteranc.es) — a commenting widget that
